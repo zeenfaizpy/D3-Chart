@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+        /*------controller----*/
+        var w = 154;
+        var h = 42;
+        var rect_1_h = 5;
+        var rect_2_h = rect_1_h * 2;
+        var rect_2_w = rect_1_h/2;
+        var rect_1_color = "#A1C9D9";
+        var rect_2_color = "#999999";
+        var text_color = "#555555";
+        var font_size = 18;
+        var font_family = "Segoe UI"
+
+        var dataset = [1200,3000,3200];
+
+        /*------controller----*/
+
+        var xScale = d3.scale.linear().domain([dataset[0],dataset[2]])
+        .range([0,w]);
+
+        var svg = d3.select("body").append("svg").attr("width",w).attr("height",h);
+        var rect1 = svg.append("rect").attr("x",0).attr("y",3*h/4).attr("width",w).attr("height",rect_1_h)
+        .style("fill",rect_1_color);
+        var rect2 = svg.append("rect").attr("x",xScale(dataset[1])).attr("y",3*h/4-rect_1_h/2).attr("width",rect_2_w)
+        .attr("height",rect_2_h).style("fill",rect_2_color);
+        
+        //var texts = svg.selectAll("text").data(dataset).enter().append("text").text(function(d){ return d; }).attr("fill","red").attr("x",function(d,i){ return i*50  }).attr("y",30)
+
+        var text1 = svg.append("text").attr("x",2).attr("y",h/3+2).text(dataset[0]).style("fill",text_color)
+        .attr("font-size",font_size).attr("font-family",font_family);
+        var text2 = svg.append("text").attr("x",w-42).attr("y",h/3+2).text(dataset[2]).style("fill",text_color)
+        .attr("font-size",font_size).attr("font-family",font_family);
+        </script>
+    </body>
+</html>
